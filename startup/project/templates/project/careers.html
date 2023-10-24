@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1 style="margin: 100px;">Courses</h1>
+
+    <div class="cards">
+        <div class="card">
+            <img src="{% static 'public/developer.png'%}" alt="Course Image">
+            <h2>Software Engineering</h2>
+            <p>This OP is one of the most relevant, in-demand and highly paid professional fields today.
+                Graduates of this direction can work in the field of network and communication software engineering. </p>
+            <a href="#" class="enroll-button">Sign up for a course</a>
+        </div>
+        <div class="card">
+            <img src="{% static 'public/product.png'%}" alt="Course Image">
+            <h2>Product Manager</h2>
+            <p>This specialty was created by practicing teachers to give you a complete understanding of product management. This degree offers you to focus on understanding the basic principles of project management, specializing in the field you are interested in. </p>
+            <a href="#" class="enroll-button">Sign up for a course</a>
+        </div>
+        <div class="card">
+            <img src="{% static 'public/data-science.png'%}" alt="Course Image">
+            <h2>Data Science</h2>
+            <p>Specialists who are able to properly organize analytical processes and implement high-performance data processing algorithms in distributed computing environments are especially in demand in the market due to the accelerated development of information technologies.</p>
+            <a href="#" class="enroll-button">Sign up for a course</a>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'public/hr.png'%}" alt="Course Image">
+            <h2>Information systems</h2>
+            <p>The specialty "Information Systems" is suitable for those who want to be in the trend of the digital age. Students will fully appreciate the impact of information technology on business and society. Graduates of our university with a degree in Information Systems will receive the skills necessary both to create new efficient enterprises and to provide IT services to existing companies.</p>
+            <a href="#" class="enroll-button">Sign up for a course</a>
+        </div>
+
+    </div>
+{% endblock %}
