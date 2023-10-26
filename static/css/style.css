@@ -336,6 +336,7 @@ i {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 .card img {
   width:250px;
   object-fit: cover;
@@ -351,6 +352,10 @@ i {
   font-size: 14px;
   color: #555;
   height: 150px;
+}
+
+.card:hover{
+box-shadow: 0 6px 10px rgba(0, 0, 0, 0.748);
 }
 
 .enroll-button {
@@ -371,6 +376,64 @@ i {
 .enroll-button:hover {
   background-color: #45a049;
 }
+
+
+.blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.blog-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.blog-description {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.rating-list li  {
+  float: left;
+  color: #dddddd35;
+  padding: 10px 5px;
+}
+
+.rating-list li i.checked {
+  color: orange; /* Оранжевый цвет для активных звезд */
+}
+
+
+
+
+#star1.checked, #star2.checked, #star3.checked, #star4.checked, #star5.checked {
+  color: orange; /* Оранжевый цвет для активных звезд */
+}
+
+#star1.checked::before {
+  width: 50%; /* Ширина для половины звезды */
+  overflow: hidden;
+  color: orange; /* Оранжевый цвет для заполненной части звезды */
+}
+
+
+
+
+
+
+
 
 
 
