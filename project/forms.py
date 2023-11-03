@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import Form
+from .models import Comment
 class RatingForm(forms.Form):
     RATING_CHOICES = (
         (1, '1 звезда'),
@@ -8,3 +10,8 @@ class RatingForm(forms.Form):
         (5, '5 звезд'),
     )
     rating = forms.ChoiceField(choices=RATING_CHOICES, widget=forms.RadioSelect)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content',] 

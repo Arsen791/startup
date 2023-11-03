@@ -29,7 +29,7 @@ document.addEventListener("scroll", function () {
 function highlightStars(rating) {
     const stars = document.querySelectorAll('.rating-list li i');
     stars.forEach((star, index) => {
-        if (index < rating) {
+        if (index  < rating) {
             star.classList.add('checked');
         } else {
             star.classList.remove('checked');
@@ -43,7 +43,5 @@ function resetStars(user_rating) {
         star.classList.toggle('checked', index < user_rating);
     });
 }
-
-
 
 

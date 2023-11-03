@@ -33,3 +33,12 @@ class Rating(models.Model):
     def save(self, *args, **kwargs):
         super(Rating, self).save(*args, **kwargs)
         self.blog.average_rating()
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE) 
+    parent_comment = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    content = models.CharField(null=False, max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)

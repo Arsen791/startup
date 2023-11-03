@@ -1,41 +1,68 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container" style="padding: 2em">
-    <div class="card" style="width: 30rem;">
-        <img class="card-img-top" src="{{ blogs.image.url }}" alt="{{ blogs.title }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ blogs.title }}</h5>
-            <p class="card-text">{{ blogs.description }}</p>
-            <p class="card-text">Created at: {{ blogs.created_at }}</p>
-            <p class="card-text">Views: {{ blogs.views }}</p>
-			<h5 class="card-title">Average Rating:
-				<span id="star1" class="fa fa-star {% if average_rating >= 0.5 %} checked {% endif %}"></span>
-				<span id="star2" class="fa fa-star {% if average_rating >= 1.5 %} checked {% endif %}"></span>
-				<span id="star3" class="fa fa-star {% if average_rating >= 2.5 %} checked {% endif %}"></span>
-				<span id="star4" class="fa fa-star {% if average_rating >= 3.5 %} checked {% endif %}"></span>
-				<span id="star5" class="fa fa-star {% if average_rating >= 4.5 %} checked {% endif %}"></span>
-				<span>{{average_rating}}</span>
-			  </h5>
-			  
-			  
-			
-            <ul class="btn btn-light list-inline rating-list">
-				<li onmouseover="highlightStars(1)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(1, '{{ blogs.id }}')">
-					<i class="fa fa-star {% if user_rating and user_rating.rating > 0 %} checked {% endif %}" title="Rate 1"></i>
-				</li>				
-                <li onmouseover="highlightStars(2)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(2, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 1 %} checked {% endif %}" title="Rate 2"></i></li>
-                <li onmouseover="highlightStars(3)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(3, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 2 %} checked {% endif %}" title="Rate 3"></i></li>
-                <li onmouseover="highlightStars(4)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(4, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 3 %} checked {% endif %}" title="Rate 4"></i></li>
-                <li onmouseover="highlightStars(5)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(5, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 4 %} checked {% endif %}" title="Rate 5"></i></li>
-            </ul>
+<div class="container-1" style="padding: 2em;">
+    <div class="blog-content">
+        <div class="blog-image">
+            <img src="{{ blogs.image.url }}" alt="{{ blogs.title }}">
         </div>
+        <div class="blog-details">
+            <h2 class="blog-title">{{ blogs.title }}</h2>
+            <p class="blog-description">{{ blogs.description }}</p>
+            <p>Created at: {{ blogs.created_at }}</p>
+            <p>Views: {{ blogs.views }}</p>
+            <h5 class="rating-title">Average Rating:
+                <span id="star1" class="fa fa-star {% if average_rating >= 0.5 %} checked {% endif %}"></span>
+                <span id="star2" class="fa fa-star {% if average_rating >= 1.5 %} checked {% endif %}"></span>
+                <span id="star3" class="fa fa-star {% if average_rating >= 2.5 %} checked {% endif %}"></span>
+                <span id="star4" class="fa fa-star {% if average_rating >= 3.5 %} checked {% endif %}"></span>
+                <span id="star5" class="fa fa-star {% if average_rating >= 4.5 %} checked {% endif %}"></span>
+                <span>{{ average_rating }}</span>
+            </h5>
+            <ul class="btn btn-light list-inline rating-list">
+                <li onmouseover="highlightStars(1)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(1, '{{ blogs.id }}')">
+                    <i class="fa fa-star {% if user_rating and user_rating.rating > 0 %} checked {% endif %}" title="Rate 1"></i>
+                </li>				
+                <li onmouseover="highlightStars(2)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(2, '{{ blogs.id }}')">
+                    <i class="fa fa-star {% if user_rating and user_rating.rating > 1 %} checked {% endif %}" title="Rate 2"></i>
+                </li>
+                <li onmouseover="highlightStars(3)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(3, '{{ blogs.id }}')">
+                    <i class="fa fa-star {% if user_rating and user_rating.rating > 2 %} checked {% endif %}" title="Rate 3"></i>
+                </li>
+                <li onmouseover="highlightStars(4)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(4, '{{ blogs.id }}')">
+                    <i class="fa fa-star {% if user_rating and user_rating.rating > 3 %} checked {% endif %}" title="Rate 4"></i>
+                </li>
+                <li onmouseover="highlightStars(5)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(5, '{{ blogs.id }}')">
+                    <i class="fa fa-star {% if user_rating and user_rating.rating > 4 %} checked {% endif %}" title="Rate 5"></i>
+                </li>
+            </ul>
+            {% if user_rating %}
+                <p>Your Rating: {{ user_rating.rating }}</p>
+            {% endif %}
+        </div>
+
+
+
     </div>
 </div>
+<div class="comments">
+    {% for comment in comments %}
+        <div class="comment">
+            <p><strong>{{ comment.user.username }}</strong> - {{ comment.created_at }}</p>
+            <p>{{ comment.content }}</p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+</div>
+<form method="post" class="comment-form">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Отправить комментарий</button>
+</form>
+
+
+
 
 {% endblock %}
 

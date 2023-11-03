@@ -11,6 +11,9 @@
   box-sizing: border-box;
 }
 
+
+
+
 .align-items-center {
   align-items: center !important;
 }
@@ -21,11 +24,6 @@
 
 .d-flex {
   display: flex !important;
-}
-
-a, a:focus, a:hover {
-  text-decoration: none;
-  outline: 0;
 }
 
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -108,6 +106,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   list-style: none;
+  
 }
 
 .nav-menu > li {
@@ -328,7 +327,7 @@ i {
 
 .card {
   width: 400px;
-  height: 550px;
+  height: 570px;
   border: 1px solid #ccc;
   border-radius: 8px;
   margin: 20px;
@@ -374,41 +373,36 @@ box-shadow: 0 6px 10px rgba(0, 0, 0, 0.748);
 }
 
 .enroll-button:hover {
-  background-color: #45a049;
+  background-color: #45a049;text-decoration: none;
+}
+
+.container-1{
+  margin-top: 70px;
 }
 
 
-.blog-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin-top: 20px;
+.blog-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
 }
 
-.blog-title {
-  text-align: center;
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.blog-image {
-  width: 100%;
+.blog-image img {
+  max-width: 100%;
   height: auto;
-  border-radius: 5px;
 }
 
-.blog-description {
-  font-size: 18px;
-  line-height: 1.6;
-}
 
 .rating-list li  {
   float: left;
   color: #dddddd35;
   padding: 10px 5px;
+  
+}
+
+i {
+  color: #949292;
 }
 
 .rating-list li i.checked {
@@ -416,19 +410,67 @@ box-shadow: 0 6px 10px rgba(0, 0, 0, 0.748);
 }
 
 
-
-
 #star1.checked, #star2.checked, #star3.checked, #star4.checked, #star5.checked {
   color: orange; /* Оранжевый цвет для активных звезд */
 }
 
-#star1.checked::before {
-  width: 50%; /* Ширина для половины звезды */
-  overflow: hidden;
-  color: orange; /* Оранжевый цвет для заполненной части звезды */
+/* Основные стили для комментариев */
+.comments {
+  margin-top: 20px;
 }
 
+.comment {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
 
+.child-comment {
+  margin-left: 30px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+/* Стили для формы ответа на комментарий */
+.comment-form {
+  margin-top: 20px;
+}
+
+.comment-form input[type="text"]{
+  width: 600px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comment-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #45a049;
+}
+
+p:hover {
+  color: #09651a; /* Изменение цвета при наведении мыши */
+  transition: color 0.8s ease; /* Плавное изменение цвета в течение 0.3 секунды */
+  font-weight: bold;
+}
+
+h1:hover {
+  color: #45a049; /* Изменение цвета при наведении мыши */
+  transition: color 0.9s ease; /* Плавное изменение цвета в течение 0.3 секунды */
+}
 
 
 

@@ -28,7 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTHENTICATION_BACKENDS = (
+    'allauth.socialaccount.backends.google.GoogleOAuth2',
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,13 +40,43 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'project',
     'user'
 ]
 
+LOGIN_URL = 'account_login'
+LOGOUT_URL = 'account_logout'
+LOGIN_REDIRECT_URL = 'home'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '794214361678-h44l94e0uqtmc41r1fkmdttkkd2a7f7u.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': [
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+		'redirect_uri': 'http://127.0.0.1:8000/accounts/google/login/callback/'
+
+    }
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '760496544351-ujoel3p0ofepuq57603iglnsre3dshhg.apps.googleusercontent.com' # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Consumer Secret
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+	'allauth.account.middleware.AccountMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,8 +162,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-
 # Default primary key field type
+
+
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -5,6 +5,7 @@ from .forms import UserRegistrationForm, LoginForm
 import random
 
 
+
 def login_page(request):
     if request.method == 'GET':
         form = LoginForm()

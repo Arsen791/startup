@@ -1,4 +1,5 @@
 {% load static %}
+
 <html>
     <head>
         <link href="{% static 'css/style.css' %}" rel="stylesheet" />
@@ -14,21 +15,22 @@
           </div>
           <div class="container main-menu">
               <div class="row align-items-center justify-content-between d-flex">
-                  <a href="#" style="color: #113C49;font-size: 22px;font-style: normal;font-weight: 700;line-height: normal;letter-spacing: 1.28px;">LearnHub</a>		
+                  <a href="#" style="text-decoration: none;color: #113C49;font-size: 22px;font-style: normal;font-weight: 700;line-height: normal;letter-spacing: 1.28px;">LearnHub</a>		
                   <nav id="nav-menu-container">
                       <ul class="nav-menu">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="careers/">Courses</a></li>
+                        <li><a href="#" style="text-decoration: none;">Home</a></li>
+                        <li><a href="careers/" style="text-decoration: none;">Courses</a></li>
 
                         {% if user.is_authenticated %}
-                        <li><a href="#"><i class="fa fa-user"></i>&nbsp;{{ user.username }}</a></li>
-                            <li><a href="auth/logout">Log Out</a></li>
+                        <li><a href="#" style="text-decoration: none;"><i class="fa fa-user"></i>&nbsp;{{ user.username }}</a></li>
+                            <li><a href="auth/logout" style="text-decoration: none;">Log Out</a></li>
                             
 
                         {% else %}
-                            <li><a href="auth/login" style="display: block; padding: 10px 30px; color: #6C6C6C; border-radius: 80px; background: #FFF; box-shadow: 0px 20px 24px 0px rgba(0, 0, 0, 0.03);">Login</a></li>
+                            <li><a href="auth/login" style="display: block; padding: 10px 30px; color: #6C6C6C; border-radius: 80px; background: #FFF; box-shadow: 0px 20px 24px 0px rgba(0, 0, 0, 0.03); ">Login</a></li>
                             <li><a href="auth/register" style="display: block; padding: 10px 30px; border-radius: 80px; background: #2F327D; color: #fff;">Sign Up</a></li>
                         {% endif %}
+                      </ul>
                   </nav>	
               </div>
           </div>
@@ -36,6 +38,8 @@
         {% block content %}
         {% endblock %}
         <script src="{% static 'js/script.js' %}"></script>
+        
+
 
     </body>
 </html>
