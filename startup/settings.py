@@ -28,9 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTHENTICATION_BACKENDS = (
-    'allauth.socialaccount.backends.google.GoogleOAuth2',
-)
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -37,7 +37,11 @@
                     </div>
                 {% endfor %}
               <button class="btn btn-primary d-block col-12" type="submit">Login</button>
-              <a href="{% provider_login_url 'google' %}">Войти через Google</a>
+              <a href="{% provider_login_url 'google' %}" class="google-login-button">
+                <img src="https://edxuploads.s3.amazonaws.com/btn_google_light.svg" alt="Google Icon"> Sign in with Google
+            </a>
+            
+            
 
                 <a href="/auth/register/" class="d-block text-center mt-4">You dont have an account? Register.</a>
             </form>
