@@ -16,9 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from allauth.account import views as account_views
+from allauth.socialaccount import views as socialaccount_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('user.urls')),
     path('', include('project.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('accounts/social/login/cancelled/', socialaccount_views.LoginCancelledView.as_view(), name='socialaccount_login_cancelled'),
+    path('accounts/social/login/error/', socialaccount_views.LoginErrorView.as_view(), name='socialaccount_login_error'),
 ]
