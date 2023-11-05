@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
 
 }
 
@@ -304,9 +305,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-i {
-  color: #fff;
-}
+
 
 
 
@@ -400,8 +399,7 @@ box-shadow: 0 6px 10px rgba(0, 0, 0, 0.748);
   padding: 10px 5px;
   
 }
-
-i {
+#fa-star {
   color: #949292;
 }
 
@@ -460,7 +458,6 @@ i {
   background-color: #45a049;
 }
 
-
 .google-login-button {
   background-color: #4285f4;
   color: white;
@@ -481,6 +478,8 @@ i {
   background-color: #3160ac;
 
 }
+
+
 
 
 

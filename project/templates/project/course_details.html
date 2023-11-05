@@ -25,19 +25,19 @@
             </h5>
             <ul class="btn btn-light list-inline rating-list">
                 <li onmouseover="highlightStars(1)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(1, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 0 %} checked {% endif %}" title="Rate 1"></i>
+                    <i id="fa-star" class="fa fa-star {% if user_rating and user_rating.rating > 0 %} checked {% endif %}" title="Rate 1"></i>
                 </li>				
                 <li onmouseover="highlightStars(2)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(2, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 1 %} checked {% endif %}" title="Rate 2"></i>
+                    <i id="fa-star" class="fa fa-star {% if user_rating and user_rating.rating > 1 %} checked {% endif %}" title="Rate 2"></i>
                 </li>
                 <li onmouseover="highlightStars(3)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(3, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 2 %} checked {% endif %}" title="Rate 3"></i>
+                    <i  id="fa-star" class="fa fa-star {% if user_rating and user_rating.rating > 2 %} checked {% endif %}" title="Rate 3"></i>
                 </li>
                 <li onmouseover="highlightStars(4)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(4, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 3 %} checked {% endif %}" title="Rate 4"></i>
+                    <i id="fa-star" class="fa fa-star {% if user_rating and user_rating.rating > 3 %} checked {% endif %}" title="Rate 4"></i>
                 </li>
                 <li onmouseover="highlightStars(5)" onmouseout="resetStars('{{ user_rating.rating }}')" onclick="rate(5, '{{ blogs.id }}')">
-                    <i class="fa fa-star {% if user_rating and user_rating.rating > 4 %} checked {% endif %}" title="Rate 5"></i>
+                    <i id="fa-star" class="fa fa-star {% if user_rating and user_rating.rating > 4 %} checked {% endif %}" title="Rate 5"></i>
                 </li>
             </ul>
             {% if user_rating %}

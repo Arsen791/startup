@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+	'allauth.socialaccount.providers.facebook',
     'project',
     'user'
 ]
@@ -66,10 +67,10 @@ SOCIALACCOUNT_PROVIDERS = {
 		'redirect_uri': 'http://127.0.0.1:8000/accounts/google/login/callback/'
 
     }
+	
 }
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '760496544351-ujoel3p0ofepuq57603iglnsre3dshhg.apps.googleusercontent.com' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Consumer Secret
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -166,3 +167,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# settings.py
+
+SECURE_SSL_REDIRECT = False
