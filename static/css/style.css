@@ -403,8 +403,8 @@ box-shadow: 0 6px 10px rgba(0, 0, 0, 0.748);
   color: #949292;
 }
 
-.rating-list li i.checked {
-  color: orange; /* Оранжевый цвет для активных звезд */
+#fa-star.checked {
+  color: orange;
 }
 
 

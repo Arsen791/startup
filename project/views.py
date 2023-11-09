@@ -1,7 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Blog, Rating, Comment
+from .models import Blog, Rating, Comment, Notification
 from .forms import RatingForm, CommentForm
 from django.http import JsonResponse
+from user.models import Profile
+from django.contrib import messages
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+
+def get_notifications_count(request):
+    notifications_count = len(messages.get_messages(request))
+    return JsonResponse({'count': notifications_count})
+
+from django.core.cache import cache
+
+def notifications(request):
+    user = request.user
+    notifications = Notification.objects.filter(users=user)
+    return render(request, 'project/notifications.html', {'notifications': notifications})
+
 
 def home_page(request):
     return render(request, 'project/index.html')

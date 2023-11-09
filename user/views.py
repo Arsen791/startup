@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth, Group
 from django.contrib.auth import login
-from .forms import UserRegistrationForm, LoginForm
+from .forms import UserRegistrationForm, LoginForm, ProfileForm
 import random
+from .models import Profile
 
 
 
@@ -14,6 +15,11 @@ def login_page(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = auth.authenticate(username=form.data.get('username'), password=form.data.get('password'))
+            try:
+                profile = Profile.objects.get(owner_id=user.id)
+            except:
+                profile = Profile(owner_id=user.id)
+                profile.save()
             login(request, user)
             if user is not None:
                 return redirect('/')
@@ -32,11 +38,9 @@ def register_page(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            random_number = random.randint(0, 1)
-            group_name = 'Reception' if random_number == 0 else 'Tester'
-            group, created = Group.objects.get_or_create(name=group_name)
-            group.user_set.add(user)
             user.save()
+            profile = Profile(owner_id=user.id)
+            profile.save()
             auth_data = auth.authenticate(request, email=user.email, password=form.data.get('password'))
             if auth_data is not None:
                 login(request, auth_data)
@@ -50,3 +54,23 @@ def register_page(request):
 def logout_page(request):
     auth.logout(request)
     return redirect('/auth/login')
+
+def settings_page(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            profile = Profile.objects.get(owner_id=request.user.id)
+            profile_form = ProfileForm(data={'bio': profile.bio}, files={'image': profile.image, 'resume': profile.resume})
+            return render(request, 'user/profile.html', {'form': profile_form, 'profile': profile})
+        if request.method == 'POST':
+            profile_form = ProfileForm(request.POST, request.FILES)
+            profile = Profile.objects.get(owner_id=request.user.id)
+            if profile_form.is_valid():
+                profile.bio = profile_form.data.get('bio')
+                profile.image = profile_form.files.get('image')
+                profile.resume = profile_form.files.get('resume')
+                profile.save()
+                return render(request, 'user/profile.html', {'form': profile_form, 'profile': profile})
+            else:
+                return render(request, 'user/profile.html', {'form': profile_form, 'profile': profile})
+    else:
+        return redirect('/')

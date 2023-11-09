@@ -42,3 +42,12 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
     content = models.CharField(null=False, max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Notification(models.Model):
+    users = models.ManyToManyField(User)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message
+
