@@ -1,8 +1,9 @@
 from django.contrib import admin
-from project.models import Blog, Rating, Comment
+from project.models import Blog, Rating, Comment, Notification
 
 admin.site.register(Blog)
 admin.site.register(Rating)
+admin.site.register(Notification)
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ( 'content', 'blog', 'created_at', 'active')

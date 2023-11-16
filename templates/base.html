@@ -18,6 +18,14 @@
 		height: 100%;
 		object-fit: cover;
 	}
+    .notification-count {
+  background-color: red;  /* Задайте цвет фона, который вам нравится */
+  color: white;           /* Задайте цвет текста */
+  padding: 2px 6px;       /* Регулируйте отступы по вашему вкусу */
+  border-radius: 50%;     /* Создает круглую форму */
+  font-size: 12px;        /* Регулируйте размер шрифта по вашему вкусу */
+  margin-left: 5px;       /* Добавляет немного отступа справа от текста */
+}
         </style>
         {% block head %}
         {% endblock %}
@@ -33,7 +41,10 @@
                       <ul class="nav-menu">
                         <li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
                         <li><a href="{% url 'careers' %}" style="text-decoration: none;">Courses</a></li>
-
+                        <li><a href="{% url 'notifications' %}" style="text-decoration: none;">Notifications
+                            {% if new_notifications_count > 0 %}
+                            <span class="notification-count">{{ new_notifications_count }}</span>
+                        {% endif %}</a></li>
                         {% if user.is_authenticated %}
                         <li style="display: flex; justify-content: center;">
                             <div class="image-wrapper1">

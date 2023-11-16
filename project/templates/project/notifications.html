@@ -1,30 +1,75 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+/* style.css */
+
+
+.container-3 {
+    margin-top: 100px;
+    margin-left: 50px;
+    width: 1400px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    color: #007bff;
+}
+
+.list-group {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    border: 1px solid #dee2e6;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+.list-group-item.new {
+    font-weight: bold; /* Жирный шрифт для новых уведомлений */
+    color: #ff0000; /* Красный цвет для новых уведомлений (замените на ваш цвет) */
+}
+
+</style>
+{% endblock %}
 {% block content %}
-<div class="container">
-    <h2>Уведомления</h2>
-    <ul class="notifications">
-        {% if new_course_count > 0 %}
-        У вас {{ new_course_count }} новых курсов!
+<div class="container-3">
+    <h2>Notifications</h2>
+
+    {% if notifications %}
+        <ul class="list-group">
+            {% for notification in notifications %}
+            <p class="list-group-item{% if not notification.is_read %}new{% endif %}">
+                {{ notification.message }} ({{ notification.created_at }})
+            </p>
+        {% endfor %}
+        
+        </ul>
     {% else %}
-        Нет новых курсов.
+        <p>No notifications available.</p>
     {% endif %}
-    
-    </ul>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function(){
-    $.ajax({
-        url: "{% url 'get_notifications_count' %}",
-        type: 'GET',
-        success: function(data) {
-            $('.notification-icon').text(data.count);
-        },
-        error: function(data) {
-            console.log("Error:", data);
-        }
-    });
-});
-</script>
+
+
 
 {% endblock %}

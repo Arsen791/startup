@@ -1,28 +1,45 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog, Rating, Comment, Notification
-from .forms import RatingForm, CommentForm
+from .forms import RatingForm, CommentForm, BlogForm
 from django.http import JsonResponse
-from user.models import Profile
 from django.contrib import messages
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 
-def get_notifications_count(request):
-    notifications_count = len(messages.get_messages(request))
-    return JsonResponse({'count': notifications_count})
+def create_blogs(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            form = BlogForm()
+            return render(request, 'project/create_blogs.html', {'form': form})
+        if request.method == 'POST':
+            form = BlogForm(request.POST ,request.FILES)
+            if form.is_valid():
+                title = form.data.get('title')
+                description = form.data.get('description')
+                image = form.files.get('image')
+                blogs = Blog(title=title, description=description, image=image, owner_id=request.user.id)
+                blogs.save()
+                message = f'Новый курс "{blogs.title}" доступен для обучения'
+                notification = Notification.objects.create(message=message)
+                notification.users.set(User.objects.all())
+                return redirect('/create_blogs')
+            else:
+                return render(request, 'project/create_blogs.html', {'form': form})
+    else:
+        return redirect('/auth/login/')
 
-from django.core.cache import cache
+
 
 def notifications(request):
-    user = request.user
-    notifications = Notification.objects.filter(users=user)
+    notifications = Notification.objects.all()
+    notifications.update(is_read=True)
     return render(request, 'project/notifications.html', {'notifications': notifications})
 
 
 def home_page(request):
-    return render(request, 'project/index.html')
+    unread_notifications = Notification.objects.filter(users=request.user, is_read=False).count()
+    return render(request, 'project/index.html', {'new_notifications_count': unread_notifications})
 
 
 def careers_page(request ):

@@ -10,6 +10,11 @@ class LoginForm(Form):
     password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control',
                                                                                 'placeholder': 'Enter your password'}))
 
+class CourseCreatorLoginForm(Form):
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                            'placeholder': 'Enter your username'}))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                                                'placeholder': 'Enter your password'}))
 
 class UserRegistrationForm(ModelForm):
     repeat_password = forms.CharField(min_length=8, max_length=20, required=True, widget=

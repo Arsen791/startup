@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import Form
-from .models import Comment
+from .models import Comment, Blog
 class RatingForm(forms.Form):
     RATING_CHOICES = (
         (1, '1 звезда'),
@@ -15,3 +15,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content',] 
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['title', 'description', 'image'] 

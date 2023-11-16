@@ -13,8 +13,8 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('accounts/social/login/cancelled/', socialaccount_views.LoginCancelledView.as_view(), name='socialaccount_login_cancelled'),
     path('accounts/social/login/error/', socialaccount_views.LoginErrorView.as_view(), name='socialaccount_login_error'),
-    path('get_notifications_count/', views.get_notifications_count, name='get_notifications_count'),
     path('notifications/', views.notifications, name='notifications'),
+    path('create_blogs/', views.create_blogs, name='create_blogs'),
     
 
 ]

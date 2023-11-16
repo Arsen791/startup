@@ -10,6 +10,7 @@ class Blog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField(default=0)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
 
     def average_rating(self):
@@ -47,6 +48,7 @@ class Notification(models.Model):
     users = models.ManyToManyField(User)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False) 
 
     def __str__(self):
         return self.message

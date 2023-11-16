@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth, Group
 from django.contrib.auth import login
-from .forms import UserRegistrationForm, LoginForm, ProfileForm
+from .forms import UserRegistrationForm, LoginForm, ProfileForm, CourseCreatorLoginForm
 import random
 from .models import Profile
 
@@ -28,6 +28,30 @@ def login_page(request):
                 return render(request, 'user/login.html', {'form': form})
         else:
             return render(request, 'user/login.html', {'form': form})
+        
+
+
+def login_course_creator(request):
+    if request.method == 'GET':
+        form = CourseCreatorLoginForm()
+        return render(request, 'user/coursecreatorlogin.html', {'form': form})
+    if request.method == 'POST':
+        form = CourseCreatorLoginForm(request.POST)
+        if form.is_valid():
+            user = auth.authenticate(username=form.data.get('username'), password=form.data.get('password'))
+            try:
+                profile = Profile.objects.get(owner_id=user.id)
+            except:
+                profile = Profile(owner_id=user.id)
+                profile.save()
+            login(request, user)
+            if user is not None and user.groups.filter(name='Course Creators').exists():
+                return redirect('/create_blogs')
+            else:
+                form.add_error(field='username', error='Invalid password or login')
+                return render(request, 'user/coursecreatorlogin.html', {'form': form})
+        else:
+            return render(request, 'user/coursecreatorlogin.html', {'form': form})
 
 
 def register_page(request):
