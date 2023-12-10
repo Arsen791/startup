@@ -14,6 +14,7 @@ urlpatterns = [
     path('accounts/social/login/cancelled/', socialaccount_views.LoginCancelledView.as_view(), name='socialaccount_login_cancelled'),
     path('accounts/social/login/error/', socialaccount_views.LoginErrorView.as_view(), name='socialaccount_login_error'),
     path('notifications/', views.notifications, name='notifications'),
+    path('mark_as_read/<int:notification_id>/', views.mark_notification_as_read, name='mark_as_read'),
     path('create_blogs/', views.create_blogs, name='create_blogs'),
     
 

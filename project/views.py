@@ -33,18 +33,37 @@ def create_blogs(request):
 
 def notifications(request):
     notifications = Notification.objects.all()
-    notifications.update(is_read=True)
     return render(request, 'project/notifications.html', {'notifications': notifications})
+
+from django.http import HttpResponseServerError
+
+def mark_notification_as_read(request, notification_id):
+    if request.method == 'POST':
+        try:
+            notification = Notification.objects.get(pk=notification_id)
+            notification.is_read = True
+            notification.save()
+            return redirect('/notifications')
+        except Notification.DoesNotExist:
+            return HttpResponseServerError('Notification does not exist')
+        except Exception as e:
+            return HttpResponseServerError(f'An error occurred: {e}')
+ 
 
 
 def home_page(request):
-    unread_notifications = Notification.objects.filter(users=request.user, is_read=False).count()
+    if request.user.is_authenticated:
+        unread_notifications = Notification.objects.filter(users=request.user, is_read=False).count()
+    else:
+        unread_notifications = 0  # Задайте значение по умолчанию для анонимных пользователей
+
     return render(request, 'project/index.html', {'new_notifications_count': unread_notifications})
 
 
 def careers_page(request ):
     courses = Blog.objects.all()
-    return render(request, 'project/careers.html', {'courses': courses})
+    unread_notifications = Notification.objects.filter(users=request.user, is_read=False).count()
+    return render(request, 'project/careers.html', {'courses': courses,'new_notifications_count': unread_notifications})
 
 def course_details(request, pk):
     blogs = Blog.objects.get(pk=pk)

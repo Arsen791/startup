@@ -45,10 +45,7 @@ p {
     color: #6c757d;
     margin-bottom: 0;
 }
-.list-group-item.new {
-    font-weight: bold; /* Жирный шрифт для новых уведомлений */
-    color: #ff0000; /* Красный цвет для новых уведомлений (замените на ваш цвет) */
-}
+
 
 </style>
 {% endblock %}
@@ -59,7 +56,7 @@ p {
     {% if notifications %}
         <ul class="list-group">
             {% for notification in notifications %}
-            <p class="list-group-item{% if not notification.is_read %}new{% endif %}">
+            <p class="list-group-item" data-notification-id="{{ notification.id }}">
                 {{ notification.message }} ({{ notification.created_at }})
             </p>
         {% endfor %}
@@ -69,7 +66,39 @@ p {
         <p>No notifications available.</p>
     {% endif %}
 </div>
+<script>
+// Получаем все уведомления
+const notifications = document.querySelectorAll('.list-group-item');
 
+// Обрабатываем каждое уведомление
+notifications.forEach(notification => {
+  notification.addEventListener('click', function() {
+    const notificationId = this.getAttribute('data-notification-id');
+
+    // Отправляем AJAX запрос на пометку уведомления как прочитанного
+    fetch(`/mark_as_read/${notificationId}`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({
+        notification_id: notificationId
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        this.classList.remove('new-notification');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+});
+
+</script>
 
 
 {% endblock %}
